@@ -1,0 +1,13 @@
+# 训练与模型配置示例
+seed: 42
+batch_size: 64
+epochs: 10000
+lr: 3e-4
+max_len: 128
+hidden_dim: 256
+num_heads: 4
+num_layers: 4
+dropout: 0.1
+clip_grad: 1.0
+warmup_steps: 4000
+save_path: "../results/model.pt"
