@@ -1,6 +1,6 @@
 seed: 42
-batch_size: 64          # 句子批大小；配合较短序列长
-epochs: 10               # 全量训练 6 个周期通常 <3 小时；更稳的做法见下方“加速/省显存”
+batch_size: 32          # 句子批大小；配合较短序列长
+epochs: 20               # 全量训练 6 个周期通常 <3 小时；更稳的做法见下方“加速/省显存”
 lr: 3e-4                # 若不用 Noam，就用这个；若保留 Noam，见下方“修正优化器”
 max_len: 96             # 从 128 降到 96，大幅降显存与时间
 hidden_dim: 256
@@ -9,5 +9,7 @@ num_layers: 4
 dropout: 0.1
 clip_grad: 1.0
 warmup_steps: 2000      # 小训练步数下把 4000 改成 2000，避免长时间过小学习率
-save_path: "../results/model.pt"
+save_path: "results/diff8_bs32_ep20_mx_96.pt"
 lr_scale: 1.0
+
+# CUDA_VISIBLE_DEVICES=2 python src/train.py --config src/config.yaml --data_dir data --seed 42

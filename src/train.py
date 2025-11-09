@@ -85,9 +85,9 @@ def train(config, data_dir, seed):
     en_val   = [x["en"] for x in val_data]
     zh_test  = [x["zh"] for x in test_data]
     en_test  = [x["en"] for x in test_data]
-    num = 25600
-    zh_train = zh_train[:num]
-    en_train = en_train[:num]
+    # num = 640000
+    # zh_train = zh_train[:num]
+    # en_train = en_train[:num]
     # zh_val = zh_val[:num]
     # en_val = en_val[:num]
 
@@ -116,7 +116,7 @@ def train(config, data_dir, seed):
     d_model = config.get('hidden_dim', 256)
     n_layers = config.get('num_layers', 4)
     n_heads = config.get('num_heads', 4)
-    d_ff = config.get('ff_dim', d_model * 4)  # 前馈层维度，默认 4x
+    d_ff = config.get('ff_dim', d_model * 8)  # 前馈层维度，默认 4x
     dropout = config.get('dropout', 0.1)
 
     model = Transformer(
@@ -234,9 +234,11 @@ def train(config, data_dir, seed):
     plt.ylabel('loss')
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join('..', 'results', 'loss.png'))
+    filename = os.path.basename(out_path)
+    loss_path = os.path.splitext(filename)[0] + "_loss.png"
+    plt.savefig(os.path.join('..', 'results', loss_path))
     plt.close()
-    print("Saved loss curve -> ../results/loss.png")
+    print("Saved loss curve -> ../results/${loss_path}")
 
 
 def main():
